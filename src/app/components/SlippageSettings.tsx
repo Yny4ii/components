@@ -84,11 +84,9 @@ export default function SlippageSelector({
         <div
           ref={popoverRef}
           className="absolute top-full left-0 mt-2 w-max bg-white z-50 py-3 px-6
-          border border-gray-300 rounded-2xl shadow-main-shadow
-          "
+          border border-gray-300 rounded-2xl shadow-main-shadow"
         >
           <div className="">
-            {/* Preset Buttons */}
             <h4 className="font-medium leading-none text-dark-gray text-sm mb-5">
               Max Spillage:
             </h4>

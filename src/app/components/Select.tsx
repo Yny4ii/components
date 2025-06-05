@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ArrowIcon from "@/app/icons/ArrowIcon";
 
 export interface SelectOption {
@@ -19,7 +19,6 @@ const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   defaultValue,
-  className = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -55,9 +54,8 @@ const Select: React.FC<SelectProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  const selectedOption = getSelectedOption();
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative`}>
       <div ref={selectRef} className="relative text-dark-gray text-xl">
         <div
           onClick={() => setIsOpen(!isOpen)}

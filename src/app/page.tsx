@@ -1,35 +1,26 @@
 "use client";
 import Navbar from "@/app/components/Navbar";
-import { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import Switcher from "@/app/components/Switcher";
 import TotalValueLocked from "@/app/components/TotalValueLocked";
 import Footer from "@/app/components/Footer";
 import Select from "@/app/components/Select";
-import { allowedDisplayValues } from "next/dist/compiled/@next/font/dist/constants";
-import UsdcIcon from "@/app/icons/UsdcIcon";
 import MainButton from "@/app/components/MainButton";
 import SlippageSelector from "@/app/components/SlippageSettings";
 import ResetButton from "@/app/components/ResetButton";
-import NumericInput from "@/app/components/NumericInput";
 import { selectOptions } from "@/app/constants/selectOptions";
-import Wrapper from "@/app/components/Wrapper";
 import TokenInfo from "@/app/components/TokenInfo";
-import SavusdIcon from "@/app/icons/SavusdIcon";
 import BuySellBlock from "@/app/components/BuySellBlock";
+import Table from "@/app/components/Table";
+import { navbarLinks } from "@/app/constants/navbarLinks";
+import { columns, data } from "@/app/constants/tableData";
 
-export const linksAArray = [
-  { href: "/", title: "Markets" },
-  { href: "/leaderboard", title: "Leaderboard" },
-  { href: "/portfolio", title: "Portfolio" },
-  { href: "/jack", title: "$Jack" },
-  { href: "/education", title: "Education" },
-];
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState("");
   return (
     <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-      <Navbar links={linksAArray} />
+      <Navbar links={navbarLinks} />
       <TotalValueLocked value={"123"} />
       <Switcher
         options={["Buy", "Sell"]}
@@ -48,18 +39,30 @@ export default function Home() {
       />
       <ResetButton />
       <Footer />
-      <NumericInput />
+
       <MainButton>Deposit</MainButton>
       <TokenInfo
-        icon={(<SavusdIcon />) as ReactNode}
+        imageSrc={
+          "https://app.stablejack.xyz/_next/static/media/savax-by-benqi.e373b019.svg"
+        }
         title={"YT-savUSD"}
         subtitle={"built on Avant's"}
-        description={"lorem"}
-        totalValueLocked={"12"}
+        description={
+          "savUSD is the staked version of avUSD, functioning as a yield-bearing asset. The yield is generated via deploying market-neutral on-chain strategies."
+        }
+        totalValueLocked={"8,656,654"}
         apy={"12"}
-        incentive={<></>}
+        incentiveSrc={
+          "https://app.stablejack.xyz/_next/static/media/savax-by-benqi.e373b019.svg"
+        }
       />
       <BuySellBlock />
+      <Table
+        title="Yield Market - "
+        subtitle="Earn fixed or leveraged yield on any asset"
+        columns={columns}
+        data={data}
+      />
     </main>
   );
 }

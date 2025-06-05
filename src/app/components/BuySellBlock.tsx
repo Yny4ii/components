@@ -7,13 +7,15 @@ import ResetButton from "@/app/components/ResetButton";
 import NumericInput from "@/app/components/NumericInput";
 import { selectOptions } from "@/app/constants/selectOptions";
 import Select from "@/app/components/Select";
+import Image from "next/image";
 
 const BuySellBlock = () => {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
-  const [selectedValue, setSelectedValue] = useState();
+  const [value, setValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
 
   return (
-    <div className="py-6 px-5 rounded-lg shadow-main-shadow flex flex-column gap-5">
+    <div className="py-6 px-5 rounded-lg shadow-main-shadow flex  gap-5 flex-col">
       <div className="border-1 border-accent rounded-lg py-5 px-8 flex flex-col items-center gap-6">
         <div className="flex justify-between w-full">
           <Switcher
@@ -30,7 +32,22 @@ const BuySellBlock = () => {
           </div>
         </div>
         <div className="flex justify-between gap-2">
-          <NumericInput />
+          <NumericInput
+            value={value}
+            onChange={setValue}
+            onValueChange={(num) => console.log("Numeric value:", num)}
+            maxValue={100}
+            step={0.1}
+            secondaryValue="$100.00"
+            disabled={false}
+            showMaxButton={true}
+            formatOptions={{
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }}
+            allowDecimals={true}
+            maxDecimals={2}
+          />
           <Select
             options={selectOptions}
             value={selectedValue}
@@ -38,7 +55,15 @@ const BuySellBlock = () => {
             defaultValue={selectOptions[0]}
           />
         </div>
-        <MainButton>Deposit</MainButton>
+        <MainButton>{side === "Buy" ? "Deposit" : "Withdraw"}</MainButton>
+      </div>
+      <div className="text-light-gray border-1 border-light-gray rounded-lg shadow-shadow-main py-3 px-4 bg-main-white flex items-center justify-between">
+        <div className="text-xl font-normal">You Receive:</div>
+        <div className="text-2xl font-bold flex items-center gap-2">
+          <div>123</div>
+          <div>123</div>
+          {/*<Image width={34} height={34} src={} alt={} />*/}
+        </div>
       </div>
     </div>
   );

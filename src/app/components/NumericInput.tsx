@@ -1,57 +1,146 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const NumericInput: React.FC = () => {
-  const [value, setValue] = useState<string>("2.53");
-  const maxValue = 100; // Максимальное значение для кнопки MAX
+interface NumericInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  onValueChange?: (numericValue: number) => void;
+  maxValue?: number;
+  minValue?: number;
+  step?: number;
+  placeholder?: string;
+  secondaryValue?: string;
+  disabled?: boolean;
+  showMaxButton?: boolean;
+  formatOptions?: Intl.NumberFormatOptions;
+  allowDecimals?: boolean;
+  maxDecimals?: number;
+}
+
+const NumericInput: React.FC<NumericInputProps> = ({
+  value,
+  onChange,
+  onValueChange,
+  maxValue,
+  minValue = 0,
+  step = 0.01,
+  placeholder = "0.00",
+  secondaryValue,
+  disabled = false,
+  showMaxButton = true,
+  formatOptions = {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 6,
+  },
+  allowDecimals = true,
+  maxDecimals = 6,
+}) => {
+  const [localValue, setLocalValue] = useState<string>(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+    const sanitizedValue = inputValue.replace(/[^\d.,-]/g, "");
 
-    // Разрешаем только цифры, точку и пустую строку
-    if (inputValue === "" || /^\d*\.?\d*$/.test(inputValue)) {
-      // Проверяем, что значение положительное
-      const numValue = parseFloat(inputValue);
-      if (inputValue === "" || (numValue >= 0 && !isNaN(numValue))) {
-        setValue(inputValue);
+    if (!allowDecimals && sanitizedValue.includes(".")) {
+      return;
+    }
+
+    const [_, decimal] = sanitizedValue.split(".");
+    if (decimal && decimal.length > maxDecimals) {
+      return;
+    }
+
+    if (sanitizedValue === "" || /^\d*\.?\d*$/.test(sanitizedValue)) {
+      const numValue = parseFloat(sanitizedValue);
+
+      if (
+        sanitizedValue === "" ||
+        isNaN(numValue) ||
+        ((minValue === undefined || numValue >= minValue) &&
+          (maxValue === undefined || numValue <= maxValue))
+      ) {
+        setLocalValue(sanitizedValue);
+        onChange(sanitizedValue);
+        if (onValueChange && !isNaN(numValue)) {
+          onValueChange(numValue);
+        }
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (localValue) {
+      const numValue = parseFloat(localValue);
+      if (!isNaN(numValue)) {
+        const formattedValue = numValue.toFixed(
+          formatOptions.maximumFractionDigits
+        );
+        setLocalValue(formattedValue);
+        onChange(formattedValue);
+        if (onValueChange) {
+          onValueChange(numValue);
+        }
       }
     }
   };
 
   const handleMaxClick = () => {
-    setValue(maxValue.toString());
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "-") {
-      e.preventDefault();
+    if (maxValue !== undefined && !disabled) {
+      const formattedValue = maxValue.toFixed(
+        formatOptions.maximumFractionDigits
+      );
+      setLocalValue(formattedValue);
+      onChange(formattedValue);
+      if (onValueChange) {
+        onValueChange(maxValue);
+      }
     }
   };
 
   return (
-    <div className="max-w-sm">
+    <div className={`max-w-sm`}>
       <div className="relative">
-        <div className="flex items-center  overflow-hidden focus-within:border-blue-500 text-light-gray  py-2 px-9 shadow-main-shadow rounded-full">
-          <div className="flex flex-col justify-between">
+        <div
+          className={`flex items-center overflow-hidden focus-within:border-blue-500 text-light-gray py-2 px-9 shadow-main-shadow rounded-[20px] ${
+            disabled ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        >
+          <div className="flex flex-col justify-between flex-1">
             <input
               type="text"
-              value={value}
+              value={localValue}
               onChange={handleInputChange}
-              placeholder="0.00"
-              className=" text-xl font-bold  bg-white outline-none"
+              onBlur={handleBlur}
+              placeholder={placeholder}
+              disabled={disabled}
+              className={`text-xl font-bold bg-white outline-none ${
+                disabled ? "cursor-not-allowed" : ""
+              }`}
+              step={step}
+              min={minValue}
+              max={maxValue}
             />
-            <div className="text-sm font-normal">0.00</div>
+            {secondaryValue && (
+              <div className="text-sm font-normal mt-1">{secondaryValue}</div>
+            )}
           </div>
 
-          <button
-            onClick={handleMaxClick}
-            className=" cursor-pointer hover:bg-gray-50 transition-colors shadow-main-shadow rounded-full text-base  font-medium py-1 px-5 "
-          >
-            Max
-          </button>
+          {showMaxButton && maxValue !== undefined && (
+            <button
+              onClick={handleMaxClick}
+              disabled={disabled}
+              className={`cursor-pointer hover:bg-gray-50 transition-colors shadow-main-shadow rounded-full text-base font-medium py-1 px-5 ${
+                disabled ? "cursor-not-allowed opacity-50" : ""
+              }`}
+            >
+              Max
+            </button>
+          )}
         </div>
-
-        {/* Значение снизу */}
       </div>
     </div>
   );
