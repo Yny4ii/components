@@ -6,13 +6,15 @@ import SlippageSelector from "@/app/components/SlippageSettings";
 import ResetButton from "@/app/components/ResetButton";
 import NumericInput from "@/app/components/NumericInput";
 import { selectOptions } from "@/app/constants/selectOptions";
-import Select from "@/app/components/Select";
+import Select, { SelectOption } from "@/app/components/Select";
 import Image from "next/image";
 
 const BuySellBlock = () => {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
   const [value, setValue] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState<SelectOption>(
+    selectOptions[0]
+  );
 
   return (
     <div className="py-6 px-5 rounded-lg shadow-main-shadow flex  gap-5 flex-col">
@@ -50,7 +52,7 @@ const BuySellBlock = () => {
           />
           <Select
             options={selectOptions}
-            value={selectedValue}
+            currentOption={selectedValue}
             onChange={setSelectedValue}
             defaultValue={selectOptions[0]}
           />

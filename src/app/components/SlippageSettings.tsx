@@ -16,16 +16,18 @@ export default function SlippageSelector({
   const [isOpen, setIsOpen] = useState(false);
   const [slippage, setSlippage] = useState(value);
   const [customValue, setCustomValue] = useState("");
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      const currentButton = buttonRef.current;
+      const currentPopover = popoverRef.current;
       if (
-        popoverRef.current &&
-        !popoverRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+        currentButton &&
+        !currentButton.contains(event.target as Node) &&
+        currentPopover &&
+        !currentPopover.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }

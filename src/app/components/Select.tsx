@@ -1,52 +1,41 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import ArrowIcon from "@/app/icons/ArrowIcon";
+import Image from "next/image";
 
 export interface SelectOption {
   value: string;
-  label: React.ReactNode;
+  label: string;
+  imageSrc: string;
 }
 
 export interface SelectProps {
   options: SelectOption[];
-  value?: string;
-  onChange: (value: string) => void;
-  defaultValue?: SelectOption;
+  currentOption: SelectOption;
+  onChange: (value: SelectOption) => void;
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
-  value,
+  currentOption,
   onChange,
-  defaultValue,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
-  const getSelectedOption = () => {
-    return options.find((option) => option.value === value);
-  };
-
   const handleSelect = (option: SelectOption) => {
-    onChange(option.value);
+    onChange(option);
     setIsOpen(false);
   };
 
   const isSelected = (option: SelectOption) => {
-    return value === option.value;
-  };
-
-  const displayValue = () => {
-    const selectedOption = getSelectedOption();
-    return selectedOption ? selectedOption.label : defaultValue?.label;
+    return currentOption.value === option.value;
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
-      ) {
+      const current = selectRef.current;
+      if (current && !current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -64,18 +53,25 @@ const Select: React.FC<SelectProps> = ({
             justify-between
           `}
         >
-          <div className="flex-1 flex items-center overflow-hidden">
-            <span className={"flex items-center gap-2"}>{displayValue()}</span>
+          <div className=" flex items-center gap-2 ">
+            <Image
+              className="rounded-full"
+              width={35}
+              height={35}
+              src={currentOption.imageSrc}
+              alt={currentOption.label}
+            />
+            <span className={"max-w-[53px] truncate "}>
+              {currentOption.label}
+            </span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div
-              className={`transition-transform duration-300 ${
-                isOpen ? "rotate-180" : ""
-              }`}
-            >
-              <ArrowIcon />
-            </div>
+          <div
+            className={`transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          >
+            <ArrowIcon />
           </div>
         </div>
 
@@ -90,6 +86,13 @@ const Select: React.FC<SelectProps> = ({
                     ${isSelected(option) ? "bg-gray-50 text-accent" : ""}
                   `}
               >
+                <Image
+                  className="rounded-full"
+                  width={35}
+                  height={35}
+                  src={currentOption.imageSrc}
+                  alt={currentOption.label}
+                />
                 <div className="flex items-center gap-2">{option.label}</div>
               </div>
             ))}

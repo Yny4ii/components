@@ -1,20 +1,14 @@
-import UsdcIcon from "@/app/icons/UsdcIcon";
-
 export const selectOptions = [
   {
     value: "usdc1",
-    label: (
-      <>
-        <UsdcIcon /> <span>USDC1</span>
-      </>
-    ) as React.ReactNode,
+    imageSrc:
+      "https://app.stablejack.xyz/_next/static/media/savusd-by-avant.5c72bdaf.svg",
+    label: "USDC1",
   },
   {
     value: "usdc2",
-    label: (
-      <>
-        <UsdcIcon /> <span>USDC2</span>
-      </>
-    ) as React.ReactNode,
+    imageSrc:
+      "https://app.stablejack.xyz/_next/static/media/savusd-by-avant.5c72bdaf.svg",
+    label: "USDC2",
   },
 ];

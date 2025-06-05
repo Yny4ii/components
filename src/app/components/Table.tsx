@@ -14,6 +14,7 @@ export interface DataConfig {
   tvl: string;
   incentive: string;
   fixedYield?: boolean;
+
   [key: string]: any;
 }
 
@@ -102,15 +103,15 @@ const Table = ({ title, subtitle, columns, data }: TableProps) => {
             </thead>
             <tbody>
               {data.map((row, index) => (
-                <tr key={index} className='className="relative'>
+                <tr key={index} className="relative group cursor-pointer group">
                   {columns.map((column) => (
                     <td
                       key={column.key}
                       className={`${
                         row.fixedYield
-                          ? "first:overflow-hidden first:before:content-['FIXED_YIELD'] first:before:absolute first:before:-left-9 first:before:top-8 first:before:-translate-y-1/2 first:before:-rotate-49 first:before:py-1.5 first:before:px-8 first:before:text-xs first:before:font-medium first:before:bg-[#257de2] first:before:text-main-white  first:before:whitespace-nowrap"
+                          ? " group-hover:bg-accent first:overflow-hidden first:before:content-['FIXED_YIELD'] first:before:absolute first:before:-left-9 first:before:top-8 first:before:-translate-y-1/2 first:before:-rotate-49 first:before:py-1.5 first:before:px-8 first:before:text-xs first:before:font-medium first:before:bg-[#257de2] first:before:text-main-white  first:before:whitespace-nowrap"
                           : ""
-                      } shadow-main-shadow first:rounded-l-lg last:rounded-r-lg px-15 py-4 bg-main-white whitespace-nowrap text-center relative`}
+                      } shadow-main-shadow first:rounded-l-lg last:rounded-r-lg px-15 py-4 bg-main-white whitespace-nowrap text-center relative transition-colors duration-300  `}
                     >
                       {column.type === "image" && (
                         <ImageCell

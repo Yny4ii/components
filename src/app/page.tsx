@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Switcher from "@/app/components/Switcher";
 import TotalValueLocked from "@/app/components/TotalValueLocked";
 import Footer from "@/app/components/Footer";
-import Select from "@/app/components/Select";
+import Select, { SelectOption } from "@/app/components/Select";
 import MainButton from "@/app/components/MainButton";
 import SlippageSelector from "@/app/components/SlippageSettings";
 import ResetButton from "@/app/components/ResetButton";
@@ -17,7 +17,9 @@ import { columns, data } from "@/app/constants/tableData";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState<SelectOption>(
+    selectOptions[0]
+  );
   return (
     <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
       <Navbar links={navbarLinks} />
@@ -29,9 +31,8 @@ export default function Home() {
       />
       <Select
         options={selectOptions}
-        value={selectedValue}
+        currentOption={selectedValue}
         onChange={setSelectedValue}
-        defaultValue={selectOptions[0]}
       />
       <SlippageSelector
         value={0.1}
