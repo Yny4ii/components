@@ -17,27 +17,9 @@ import { columns, data } from "@/app/constants/tableData";
 import type { ChartConfig } from "@/app/components/Chart";
 import CustomChart from "@/app/components/CustomChart";
 import Wrapper from "@/app/components/Wrapper";
+import { chartConfig, chartData } from "@/app/constants/chartConfig";
+import ChartBlock from "@/app/components/ChartBlock";
 
-const chartData = [
-  { month: "January", desktop: 206 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-  { month: "July", desktop: 214 },
-  { month: "August", desktop: 40 },
-  { month: "September", desktop: 80 },
-  { month: "October", desktop: 43 },
-  { month: "November", desktop: 256 },
-  { month: "December", desktop: 320 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-  },
-} satisfies ChartConfig;
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
   const [selectedValue, setSelectedValue] = useState<SelectOption>(
@@ -94,22 +76,19 @@ export default function Home() {
         columns={columns}
         data={data}
       />
-      <Wrapper>
-        <div className="flex items-center justify-between">
-          <h3>Total Value Locked</h3>
-          <Select
-            options={[{ label: "All Time", value: "allTime" }]}
-            currentOption={selectedValue}
-            onChange={setSelectedValue}
-          />
-        </div>
-        <CustomChart
-          chartConfig={chartConfig}
-          chartData={chartData}
-          areaDataKey={"desktop"}
-          axisDataKey={"month"}
-        />
-      </Wrapper>
+      <ChartBlock
+        title={"Total Value Locked"}
+        options={[
+          { label: "All Time", value: "allTime" },
+          { label: "Month", value: "month" },
+        ]}
+        currentOption={{ label: "All Time", value: "allTime" }}
+        onChange={(option) => console.log(option)}
+        chartConfig={chartConfig}
+        chartData={chartData}
+        axisDataKey={"month"}
+        areaDataKey={"desktop"}
+      />
     </main>
   );
 }
