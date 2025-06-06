@@ -1,14 +1,18 @@
 export const selectOptions = [
   {
-    value: "usdc1",
-    imageSrc:
-      "https://app.stablejack.xyz/_next/static/media/savusd-by-avant.5c72bdaf.svg",
-    label: "USDC1",
+    value: "usdc",
+    imageSrc: "https://app.stablejack.xyz/_next/static/media/usdc.28e4cab5.svg",
+    label: "USDC",
   },
   {
-    value: "usdc2",
-    imageSrc:
-      "https://app.stablejack.xyz/_next/static/media/savusd-by-avant.5c72bdaf.svg",
-    label: "USDC2",
+    value: "usdt",
+    imageSrc: "https://app.stablejack.xyz/_next/static/media/usdt.3f2529a4.svg",
+    label: "USDT",
   },
 ];
+export const selectOption = {
+  value: "rsAVAX",
+  imageSrc:
+    "https://app.stablejack.xyz/_next/static/media/rsavax_pt.32962c71.svg",
+  label: "rsAVAX",
+};
