@@ -19,6 +19,7 @@ import ChartBlock from "@/app/components/ChartBlock";
 import MarketInfo from "@/app/components/MarketInfo";
 import Disclosures from "@/app/components/Disclosures";
 import { disclosuresData } from "@/app/constants/disclosuresData";
+import MobileMenu from "@/app/components/MobileMenu";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
@@ -90,6 +91,7 @@ export default function Home() {
       />
       <MarketInfo />
       <Disclosures data={disclosuresData} />
+      <MobileMenu />
     </main>
   );
 }
