@@ -53,13 +53,15 @@ const BuySellBlock = ({
     side === "Buy" ? inactiveSelectOption : activeSelectOptions[0]
   );
 
-  const handleSideChange = (newSide: "Buy" | "Sell") => {
-    setSide(newSide);
-    const tempFirst = firstSelect;
-    const tempSecond = secondSelect;
-    setFirstSelect(tempSecond);
-    setSecondSelect(tempFirst);
-    onSideChange?.(newSide);
+  const handleSideChange = (newSide: string) => {
+    if (newSide === "Buy" || newSide === "Sell") {
+      setSide(newSide);
+      const tempFirst = firstSelect;
+      const tempSecond = secondSelect;
+      setFirstSelect(tempSecond);
+      setSecondSelect(tempFirst);
+      onSideChange?.(newSide);
+    }
   };
   const handleFirstSelectChange = (option: SelectOption) => {
     setFirstSelect(option);
@@ -120,7 +122,7 @@ const BuySellBlock = ({
         </div>
         <MainButton>{side === "Buy" ? "Deposit" : "Withdraw"}</MainButton>
       </div>
-      <div className="text-light-gray border-1 border-light-gray rounded-lg shadow-shadow-main py-2 px-8 bg-main-white flex items-center justify-between">
+      <div className="text-light-gray border-1 border-light-gray rounded-lg shadow-main-shadow py-2 px-8 bg-main-white flex items-center justify-between">
         <div className="text-xl font-normal">You Receive:</div>
         <div className="text-2xl font-bold flex items-center gap-2">
           <div>123</div>

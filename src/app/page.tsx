@@ -65,7 +65,6 @@ export default function Home() {
       <BuySellBlock
         activeSelectOptions={selectOptions}
         inactiveSelectOption={selectOption}
-        initialSide="Buy"
         slippageValue={0.1}
         maxValue={1000}
         secondaryValue="$1,000.00"
