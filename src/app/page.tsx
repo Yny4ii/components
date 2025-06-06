@@ -19,6 +19,7 @@ import CustomChart from "@/app/components/CustomChart";
 import Wrapper from "@/app/components/Wrapper";
 import { chartConfig, chartData } from "@/app/constants/chartConfig";
 import ChartBlock from "@/app/components/ChartBlock";
+import MarketInfo from "@/app/components/MarketInfo";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
@@ -89,6 +90,7 @@ export default function Home() {
         axisDataKey={"month"}
         areaDataKey={"desktop"}
       />
+      <MarketInfo />
     </main>
   );
 }
