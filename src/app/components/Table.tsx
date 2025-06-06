@@ -80,7 +80,7 @@ const Table = ({ title, subtitle, columns, data }: TableProps) => {
           </div>
         )}
 
-        <div>
+        <div className={"overflow-x-auto"}>
           <table className="w-full border-spacing-y-1.5 border-separate">
             <thead>
               <tr>
