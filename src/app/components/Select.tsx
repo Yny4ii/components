@@ -78,7 +78,7 @@ const Select: React.FC<SelectProps> = ({
               />
             )}
             <span
-              className={`truncate ${
+              className={` ${
                 currentOption.imageSrc ? "max-w-[53px]" : "max-w-[120px]"
               }`}
             >
