@@ -14,12 +14,11 @@ import BuySellBlock from "@/app/components/BuySellBlock";
 import Table from "@/app/components/Table";
 import { navbarLinks } from "@/app/constants/navbarLinks";
 import { columns, data } from "@/app/constants/tableData";
-import type { ChartConfig } from "@/app/components/Chart";
-import CustomChart from "@/app/components/CustomChart";
-import Wrapper from "@/app/components/Wrapper";
 import { chartConfig, chartData } from "@/app/constants/chartConfig";
 import ChartBlock from "@/app/components/ChartBlock";
 import MarketInfo from "@/app/components/MarketInfo";
+import Disclosures from "@/app/components/Disclosures";
+import { disclosuresData } from "@/app/constants/disclosuresData";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
@@ -91,6 +90,7 @@ export default function Home() {
         areaDataKey={"desktop"}
       />
       <MarketInfo />
+      <Disclosures data={disclosuresData} />
     </main>
   );
 }
