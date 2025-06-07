@@ -13,12 +13,12 @@ interface NavbarProps {
 const Navbar = ({ links }: NavbarProps) => {
   const pathName = usePathname();
   return (
-    <nav className="rounded-full px-18.5 py-3 bg-main-bg shadow-main-shadow">
-      <ul className="flex items-center gap-[30px]">
+    <nav className="hidden lg:block rounded-full px-8 xl:px-16 xl:px-18.5 py-3 bg-main-bg shadow-main-shadow">
+      <ul className="flex items-center gap-5 xl:gap-7.5">
         {links.map((e) => (
           <li key={e.title}>
             <Link
-              className={`duration-300  block text-xl py-5 px-14 rounded-full ${
+              className={`duration-300 px-6 py-4  block text-xl xl:py-5 xl:px-14 rounded-full ${
                 pathName.includes(e.href)
                   ? "bg-accent text-gray-50"
                   : "text-soft-red hover:text-accent"
