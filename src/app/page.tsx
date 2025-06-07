@@ -3,7 +3,6 @@ import Navbar from "@/app/components/Navbar";
 import React, { useState } from "react";
 import Switcher from "@/app/components/Switcher";
 import TotalValueLocked from "@/app/components/TotalValueLocked";
-import Footer from "@/app/components/Footer";
 import Select, { SelectOption } from "@/app/components/Select";
 import MainButton from "@/app/components/MainButton";
 import SlippageSelector from "@/app/components/SlippageSettings";
@@ -21,6 +20,7 @@ import Disclosures from "@/app/components/Disclosures";
 import { disclosuresData } from "@/app/constants/disclosuresData";
 import MobileMenu from "@/app/components/MobileMenu";
 import TokenOperationBlock from "@/app/components/TokenOperationBlock";
+import MobileTokenCard from "@/app/components/MobileTokenCard";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
@@ -76,6 +76,21 @@ export default function Home() {
         subtitle="Earn fixed or leveraged yield on any asset"
         columns={columns}
         data={data}
+      />
+      <MobileTokenCard
+        market={"Yield Market"}
+        imageSrc={
+          "https://app.stablejack.xyz/_next/static/media/usdc.28e4cab5.svg"
+        }
+        tokenName={"rsAVAX"}
+        chainImageSrc={
+          "https://app.stablejack.xyz/_next/static/media/usdc.28e4cab5.svg"
+        }
+        apy={"13.3"}
+        tvl={"8,565,565"}
+        incentive={
+          "https://app.stablejack.xyz/_next/static/media/usdc.28e4cab5.svg"
+        }
       />
       <ChartBlock
         title={"Total Value Locked"}
