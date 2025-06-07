@@ -80,8 +80,8 @@ const BuySellBlock = ({
   const isFirstSelectActive = side === "Buy";
   const isSecondSelectActive = side === "Sell";
   return (
-    <div className="py-6 px-5 rounded-lg shadow-main-shadow flex  gap-5 flex-col">
-      <div className="border-1 border-accent rounded-lg py-5 px-8 flex flex-col items-center gap-6">
+    <div className="py-6 px-4 sm:px-5 rounded-lg shadow-main-shadow flex  gap-5 flex-col">
+      <div className="border-1 border-accent rounded-lg py-3 px-2 sm:py-5 sm:px-8  flex flex-col items-center gap-6">
         <div className="flex justify-between w-full">
           <Switcher
             options={["Buy", "Sell"]}
@@ -122,9 +122,9 @@ const BuySellBlock = ({
         </div>
         <MainButton>{side === "Buy" ? "Deposit" : "Withdraw"}</MainButton>
       </div>
-      <div className="text-light-gray border-1 border-light-gray rounded-lg shadow-main-shadow py-2 px-8 bg-main-white flex items-center justify-between">
-        <div className="text-xl font-normal">You Receive:</div>
-        <div className="text-2xl font-bold flex items-center gap-2">
+      <div className="text-light-gray border-1 border-light-gray rounded-lg shadow-main-shadow py-1 px-4 sm:py-2 sm:px-8 bg-main-white flex items-center justify-between">
+        <div className="text-xs sm:text-xl font-normal">You Receive:</div>
+        <div className="text-base sm:text-2xl font-bold flex items-center gap-2">
           <div>123</div>
           <Select
             disabled={!isSecondSelectActive}

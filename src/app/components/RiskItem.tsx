@@ -8,8 +8,8 @@ export interface RiskItemProps {
 
 const RiskItem = ({ icon, title, description }: RiskItemProps) => {
   return (
-    <div className="flex items-center gap-1">
-      <div className="flex justify-center items-center w-8 h-8">{icon}</div>
+    <div className="flex items-start gap-1 text-xs sm:text-base">
+      <div className="flex justify-center items-center">{icon}</div>
       <span className="font-normal">
         <span className="font-bold">{title}</span> {description}
       </span>

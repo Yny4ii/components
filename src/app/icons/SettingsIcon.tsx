@@ -3,8 +3,7 @@ import React from "react";
 const SettingsIcon = () => {
   return (
     <svg
-      width="28"
-      height="28"
+      className="w-3 h-3 sm:w-7 sm:h-7"
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

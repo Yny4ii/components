@@ -102,45 +102,45 @@ const NumericInput: React.FC<NumericInputProps> = ({
   };
 
   return (
-    <div className={`max-w-sm`}>
-      <div className="relative">
-        <div
-          className={`flex items-center overflow-hidden focus-within:border-blue-500 text-light-gray py-2 px-9 shadow-main-shadow rounded-[20px] ${
-            disabled ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          <div className="flex flex-col justify-between flex-1">
-            <input
-              type="text"
-              value={localValue}
-              onChange={handleInputChange}
-              onBlur={handleBlur}
-              placeholder={placeholder}
-              disabled={disabled}
-              className={`text-xl font-bold bg-white outline-none ${
-                disabled ? "cursor-not-allowed" : ""
-              }`}
-              step={step}
-              min={minValue}
-              max={maxValue}
-            />
-            {secondaryValue && (
-              <div className="text-sm font-normal mt-1">{secondaryValue}</div>
-            )}
-          </div>
-
-          {showMaxButton && maxValue !== undefined && (
-            <button
-              onClick={handleMaxClick}
-              disabled={disabled}
-              className={`cursor-pointer hover:bg-gray-50 transition-colors shadow-main-shadow rounded-full text-base font-medium py-1 px-5 ${
-                disabled ? "cursor-not-allowed opacity-50" : ""
-              }`}
-            >
-              Max
-            </button>
+    <div className="relative">
+      <div
+        className={`bg-main-white flex items-center overflow-hidden focus-within:border-blue-500 text-light-gray py-1.5 px-4 sm:px-9 shadow-main-shadow rounded-[20px] ${
+          disabled ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+      >
+        <div className="flex flex-col justify-between flex-1">
+          <input
+            type="text"
+            value={localValue}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            placeholder={placeholder}
+            disabled={disabled}
+            className={`text-lg sm:text-xl font-bold bg-main-white outline-none ${
+              disabled ? "cursor-not-allowed" : ""
+            }`}
+            step={step}
+            min={minValue}
+            max={maxValue}
+          />
+          {secondaryValue && (
+            <div className="text-xs sm:text-sm font-normal sm:mt-1">
+              {secondaryValue}
+            </div>
           )}
         </div>
+
+        {showMaxButton && maxValue !== undefined && (
+          <button
+            onClick={handleMaxClick}
+            disabled={disabled}
+            className={`cursor-pointer hover:bg-gray-50 transition-colors shadow-main-shadow rounded-full text-base font-medium py-1 px-5 ${
+              disabled ? "cursor-not-allowed opacity-50" : ""
+            }`}
+          >
+            Max
+          </button>
+        )}
       </div>
     </div>
   );

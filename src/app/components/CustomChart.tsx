@@ -1,13 +1,14 @@
 "use client";
 
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import type { ReactElement } from "react";
+import { useEffect, useState } from "react";
 import {
-  type ChartConfig,
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/app/components/Chart";
-import type { ReactElement } from "react";
 
 interface TickProps {
   x: number;
@@ -24,18 +25,75 @@ export interface CustomChartProps {
   axisDataKey: string;
   areaDataKey: string;
 }
+
+const useScreenSize = () => {
+  const [screenSize, setScreenSize] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 1024,
+    height: typeof window !== "undefined" ? window.innerHeight : 768,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return screenSize;
+};
+
 const CustomChart = ({
   chartConfig,
   chartData,
   areaDataKey,
   axisDataKey,
 }: CustomChartProps) => {
+  const { width } = useScreenSize();
+  const getResponsiveSettings = () => {
+    if (width < 640) {
+      return {
+        fontSize: 12,
+        interval: Math.max(0, Math.floor(chartData.length / 3) - 1),
+        tickMargin: 6,
+        adjustment: 30,
+      };
+    } else if (width < 768) {
+      return {
+        fontSize: 14,
+        interval: Math.max(0, Math.floor(chartData.length / 4) - 1),
+        tickMargin: 7,
+        adjustment: 35,
+      };
+    } else if (width < 1024) {
+      return {
+        fontSize: 16,
+        interval: Math.max(0, Math.floor(chartData.length / 6) - 1),
+        tickMargin: 8,
+        adjustment: 40,
+      };
+    } else {
+      return {
+        fontSize: 18,
+        interval: 0,
+        tickMargin: 8,
+        adjustment: 45,
+      };
+    }
+  };
+
+  const settings = getResponsiveSettings();
+
   return (
     <div className="w-full border border-accent rounded-2xl px-4 pt-2 pb-2 shadow-secondary-shadow">
       <div className="overflow-visible" style={{ margin: "0 -16px" }}>
         <ChartContainer
           config={chartConfig}
-          className="h-[250px] w-full"
+          className="h-[200px] sm:h-[220px] md:h-[240px] lg:h-[250px] w-full"
           style={{ padding: 0 }}
         >
           <AreaChart
@@ -57,14 +115,18 @@ const CustomChart = ({
               dataKey={axisDataKey}
               tickLine={false}
               axisLine={true}
-              tickMargin={8}
-              interval={0}
+              tickMargin={settings.tickMargin}
+              interval={settings.interval}
               tick={(props: TickProps): ReactElement<SVGElement> => {
                 const { x, y, payload, index } = props;
 
                 const isFirst = index === 0;
                 const isLast = index === chartData.length - 1;
-                const adjustedX = isFirst ? x + 45 : isLast ? x - 45 : x;
+                const adjustedX = isFirst
+                  ? x + settings.adjustment
+                  : isLast
+                  ? x - settings.adjustment
+                  : x;
 
                 return (
                   <g transform={`translate(${adjustedX},${y})`}>
@@ -74,7 +136,8 @@ const CustomChart = ({
                       dy={12}
                       textAnchor="middle"
                       fill="#6e6e6e"
-                      fontSize={20}
+                      fontSize={settings.fontSize}
+                      className="select-none"
                     >
                       {payload.value.slice(0, 3)}
                     </text>

@@ -75,7 +75,7 @@ export default function SlippageSelector({
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-[95px] group  cursor-pointer text-accent shadow-main-shadow flex items-center justify-between px-3 py-1 gap-1 text-sm font-medium  bg-transparent  rounded-2xl hover:bg-gray-50 focus:outline-none"
+        className="w-[95px] group  cursor-pointer text-accent shadow-main-shadow flex items-center justify-between px-3 py-1 gap-1 text-xs sm:text-sm font-medium  bg-transparent  rounded-2xl hover:bg-gray-50 focus:outline-none"
       >
         <span>{slippage}%</span>
         <div className="flex items-center justify-center transition-transform duration-300 group-hover:-rotate-180">
@@ -85,7 +85,7 @@ export default function SlippageSelector({
       {isOpen && (
         <div
           ref={popoverRef}
-          className="absolute top-full left-0 mt-2 w-max bg-white z-50 py-3 px-6
+          className="absolute top-full right-0 mt-2 w-max bg-white z-50 py-3 px-6
           border border-gray-300 rounded-2xl shadow-main-shadow"
         >
           <div className="">

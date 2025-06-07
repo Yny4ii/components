@@ -17,7 +17,7 @@ const InfoCard = ({
     <div
       className={`flex-shrink-0 border border-light-gray rounded-lg py-3 px-2 bg-white flex flex-col items-center justify-center gap-1 ${width} ${className}`}
     >
-      <h5 className="text-xl font-bold">{title}</h5>
+      <h5 className="text-base sm:text-xl font-bold">{title}</h5>
       {children}
     </div>
   );

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface SwitcherProps {
-  options: [string, string];
+  options: string[];
   active: string;
   onChange: (value: string) => void;
 }
@@ -42,7 +42,7 @@ const Switcher = ({ options, active, onChange }: SwitcherProps) => {
   before:border-[0.5px]
   before:border-accent
   before:rounded-full
-  before:z-[-1]
+  before:z-[3]
   before:left-[1%]"
     >
       <div
@@ -59,7 +59,7 @@ const Switcher = ({ options, active, onChange }: SwitcherProps) => {
           <button
             key={option}
             onClick={() => onChange(option)}
-            className={`relative z-10 border-[0.5px] cursor-pointer px-10 py-2 rounded-full transition-all duration-300 text-sm font-medium ${
+            className={`relative z-10 border-1 cursor-pointer  rounded-full transition-all duration-300 text-xs py-1 px-7 sm:text-sm sm:px-10 sm:py-2 font-medium ${
               isActive
                 ? "text-main-white border-main-white shadow-md"
                 : "text-accent border-transparent hover:text-accent/80"

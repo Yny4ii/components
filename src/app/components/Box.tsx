@@ -5,8 +5,8 @@ interface BoxProps {
 }
 const Box = ({ children, title }: BoxProps) => {
   return (
-    <div className="w-[258px] shadow-main-shadow border-1 border-light-gray rounded-lg text-light-gray py-5.5 px-10 bg-main-white flex flex-col gap-1 items-center">
-      <span className="text-xl font-normal">{title}</span>
+    <div className="w-full xl:w-[258px] justify-between shadow-main-shadow border-1 border-light-gray rounded-lg text-light-gray py-4 px-6 sm:py-5.5 sm:px-10 flex-row lg:flex-col bg-main-white flex  gap-1 items-center">
+      <span className="font-base sm:text-xl font-normal">{title}</span>
       {children}
     </div>
   );

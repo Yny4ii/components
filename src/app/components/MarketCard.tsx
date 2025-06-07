@@ -1,17 +1,17 @@
 import Image from "next/image";
 import InfoCard from "@/app/components/InfoCard";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface MarketCardProps {
   title: string;
   content?: string;
   icon?: string;
-  width?: string;
+  className?: string;
 }
 
-const MarketCard = ({ title, content, icon, width }: MarketCardProps) => {
+const MarketCard = ({ title, content, icon, className }: MarketCardProps) => {
   return (
-    <InfoCard title={title} width={width}>
+    <InfoCard title={title} className={className}>
       {content
         ? ((
             <p className="font-normal text-center text-sm text-gray-600">
@@ -20,10 +20,17 @@ const MarketCard = ({ title, content, icon, width }: MarketCardProps) => {
           ) as ReactNode)
         : icon
         ? ((
-            <Image width={56} height={56} src={icon} alt="token" />
+            <Image
+              className="w-10 h-10 sm:w-14 sm-h-14"
+              width={56}
+              height={56}
+              src={icon}
+              alt="token"
+            />
           ) as ReactNode)
         : null}
     </InfoCard>
   );
 };
+
 export default MarketCard;

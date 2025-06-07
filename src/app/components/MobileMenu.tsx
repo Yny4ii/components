@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const MobileMenu = () => {
   const pathName = usePathname();
   return (
-    <div className="fixed bottom-0 left-0 w-full h-32 px-5 pb-4 flex lg:hidden items-end bg-gradient-to-t from-[#d3caca] from-0% to-[#f7f2f2] to-87.5% z-[999]">
+    <div className="fixed bottom-0 left-0 w-full h-32 px-5 pb-4 flex lg:hidden items-end bg-gradient-to-t from-[#d3caca] from-0% to-[#f7f2f2cc] to-87.5% z-[999]">
       <div className="flex justify-between w-full items-center">
         {mobileMenuLinks.map((e) => (
           <Link

@@ -23,7 +23,9 @@ const ChartBlock = ({
   return (
     <Wrapper>
       <div className="flex items-center justify-between mb-5 ">
-        <h3 className="text-4xl font-bold text-light-gray">{title}</h3>
+        <h3 className="text-xl sm:text-4xl font-bold text-light-gray">
+          {title}
+        </h3>
         <Select
           options={options}
           currentOption={currentOption}

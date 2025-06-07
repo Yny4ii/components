@@ -54,11 +54,14 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <div className="relative">
-      <div ref={selectRef} className="relative text-dark-gray text-xl">
+      <div
+        ref={selectRef}
+        className="relative text-dark-gray text-base sm:text-xl"
+      >
         <div
           onClick={handleClick}
-          className={`max-h-17 h-[68px] max-w-41 w-41 flex items-center gap-2 
-            relative rounded-2xl py-4 px-5 transition-all
+          className={`max-h-14 h-14 sm:max-h-17 sm:h-17 max-w-27 w-27 sm:max-w-41 sm:w-41 flex items-center gap-1 sm:gap-2 
+            relative rounded-2xl p-2 sm:py-4 sm:px-5  transition-all
             justify-between
            ${
              disabled
@@ -70,7 +73,7 @@ const Select: React.FC<SelectProps> = ({
           <div className="flex items-center gap-2">
             {currentOption.imageSrc && (
               <Image
-                className="rounded-full"
+                className="rounded-full w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
                 width={35}
                 height={35}
                 src={currentOption.imageSrc}
@@ -104,13 +107,13 @@ const Select: React.FC<SelectProps> = ({
                 key={option.value}
                 onClick={() => handleSelect(option)}
                 className={`
-                     py-4 px-5 cursor-pointer flex items-center gap-2
+                     p-2 sm:py-4 sm:px-5 cursor-pointer flex items-center gap-2
                     ${isSelected(option) ? "bg-secondary-bg text-accent" : ""}
                   `}
               >
                 {option.imageSrc && (
                   <Image
-                    className="rounded-full"
+                    className="rounded-full w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
                     width={35}
                     height={35}
                     src={option.imageSrc}

@@ -20,6 +20,7 @@ import MarketInfo from "@/app/components/MarketInfo";
 import Disclosures from "@/app/components/Disclosures";
 import { disclosuresData } from "@/app/constants/disclosuresData";
 import MobileMenu from "@/app/components/MobileMenu";
+import TokenOperationBlock from "@/app/components/TokenOperationBlock";
 
 export default function Home() {
   const [side, setSide] = useState<"Buy" | "Sell">("Buy");
@@ -28,10 +29,10 @@ export default function Home() {
   );
   return (
     <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start p-5">
-      <Navbar links={navbarLinks} />
+      {/*<Navbar links={navbarLinks} />*/}
       <TotalValueLocked value={"123"} />
       <Switcher
-        options={["Buy", "Sell"]}
+        options={["Buy", "Sell", "Claim"]}
         active={side}
         onChange={(val) => setSide(val as "Buy" | "Sell")}
       />
@@ -45,7 +46,7 @@ export default function Home() {
         onChange={(value) => console.log("New slippage:", value)}
       />
       <ResetButton />
-      <Footer />
+      {/*<Footer />*/}
 
       <MainButton>Deposit</MainButton>
       <TokenInfo
@@ -91,6 +92,7 @@ export default function Home() {
       />
       <MarketInfo />
       <Disclosures data={disclosuresData} />
+      <TokenOperationBlock />
       <MobileMenu />
     </main>
   );
